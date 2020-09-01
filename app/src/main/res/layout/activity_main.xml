@@ -1,18 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/aaa" />
+
+
+        <TextView
+            android:id="@+id/anim1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="下拉刷新"
+            tools:layout_editor_absoluteX="120dp"
+            tools:layout_editor_absoluteY="30dp" />
+
+        <TextView
+            android:id="@+id/anim2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="二维码"
+            tools:layout_editor_absoluteX="112dp"
+            tools:layout_editor_absoluteY="167dp" />
+
+        <TextView
+            android:id="@+id/anim3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="轮播器"
+            tools:layout_editor_absoluteX="120dp"
+            tools:layout_editor_absoluteY="305dp" />
+
+        <TextView
+            android:id="@+id/anim4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="淘宝页面"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="438dp" />
+
+        <TextView
+            android:id="@+id/anim5"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="滑动冲突"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="438dp" />
+
+        <TextView
+            android:id="@+id/anim6"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="拍照、截图"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="438dp" />
+
+        <TextView
+            android:id="@+id/anim7"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="anim5"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="438dp" />
+
+        <TextView
+            android:id="@+id/anim8"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="anim5"
+            tools:layout_editor_absoluteX="145dp"
+            tools:layout_editor_absoluteY="438dp" />
+
+
+    </LinearLayout>
+</ScrollView>

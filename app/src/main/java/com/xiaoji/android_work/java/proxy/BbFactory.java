@@ -1,4 +1,4 @@
-package cn.enjoyedu.proxy;
+package com.xiaoji.android_work.java.proxy;
 
 public class BbFactory implements WomanToolsFactory {
     @Override

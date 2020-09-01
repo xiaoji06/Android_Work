@@ -1,9 +1,10 @@
-package cn.enjoyedu.proxy.normal;
+package com.xiaoji.android_work.java.proxy.normal;
 
-import cn.enjoyedu.proxy.ManToolsFactory;
-import cn.enjoyedu.proxy.WomanToolsFactory;
 
-public class Mark implements ManToolsFactory,WomanToolsFactory {
+import com.xiaoji.android_work.java.proxy.ManToolsFactory;
+import com.xiaoji.android_work.java.proxy.WomanToolsFactory;
+
+public class Mark implements ManToolsFactory, WomanToolsFactory {
 
     /*包含真实的对象*/
     public ManToolsFactory factory;

@@ -1,10 +1,10 @@
-package cn.enjoyedu.proxy.dynamic;
+package com.xiaoji.android_work.java.proxy.dynamic;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-public class MarkCompany implements InvocationHandler {
+public class Company implements InvocationHandler {
 
     /*持有的真实对象*/
     private Object factory;

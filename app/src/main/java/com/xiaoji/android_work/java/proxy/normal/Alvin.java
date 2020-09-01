@@ -1,6 +1,6 @@
-package cn.enjoyedu.proxy.normal;
+package com.xiaoji.android_work.java.proxy.normal;
 
-import cn.enjoyedu.proxy.WomanToolsFactory;
+import com.xiaoji.android_work.java.proxy.WomanToolsFactory;
 
 public class Alvin implements WomanToolsFactory {
 

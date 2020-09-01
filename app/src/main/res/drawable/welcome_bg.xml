@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+
+    <item android:drawable="@android:color/white"/>
+    <item android:gravity="center" android:height="160dp" android:width="160dp">
+        <bitmap
+            android:src="@drawable/app_icon"/>
+    </item>
+
+    <item android:gravity="bottom|center_horizontal" android:height="20dp" android:width="160dp" android:bottom="40dp">
+        <bitmap
+            android:src="@drawable/wenzi"/>
+    </item>
+
+</layer-list>

@@ -1,13 +1,5 @@
-package cn.enjoyedu.concurrent;
+package com.xiaoji.android_work.java.thread;
 
-import cn.enjoyedu.concurrent.tools.SleepTools;
-
-/**
- * 
- *@author Mark老师   享学课堂 https://enjoy.ke.qq.com 
- *
- *类说明：演示下join方法的使用
- */
 public class UseJoin {
 	
     static class JumpQueue implements Runnable {
@@ -41,7 +33,7 @@ public class UseJoin {
             previous = thread;
         }
 
-        SleepTools.second(2);//让主线程休眠2秒
+        Thread.sleep(2);//让主线程休眠2秒
         System.out.println(Thread.currentThread().getName() + " terminate.");
     }
 }

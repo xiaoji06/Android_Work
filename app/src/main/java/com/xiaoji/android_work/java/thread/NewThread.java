@@ -34,21 +34,21 @@ public class NewThread {
 		}
 	}
 	
-	public static void main(String[] args) 
-			throws InterruptedException, ExecutionException {
-
-		UseThread useThread = new UseThread();
-		useThread.start();
-
-		UseRun useRun = new UseRun();
-		new Thread(useRun).start();
-
-
-		UseCall useCall = new UseCall();
-		FutureTask<String> futureTask = new FutureTask<>(useCall);
-		new Thread(futureTask).start();
-		//do my work
-		//.....
-		System.out.println(futureTask.get());
-	}
+//	public static void main(String[] args)
+//			throws InterruptedException, ExecutionException {
+//
+//		UseThread useThread = new UseThread();
+//		useThread.start();
+//
+//		UseRun useRun = new UseRun();
+//		new Thread(useRun).start();
+//
+//
+//		UseCall useCall = new UseCall();
+//		FutureTask<String> futureTask = new FutureTask<>(useCall);
+//		new Thread(futureTask).start();
+//		//do my work
+//		//.....
+//		System.out.println(futureTask.get());
+//	}
 }

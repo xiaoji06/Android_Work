@@ -1,11 +1,32 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+
+    <style name="AppThemeFull" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/welcome_bg</item>
+    </style>
+
+    <style name="ScreenTheme" parent="AppTheme">
+        <!--android 4.4-->
+        <!--沉浸式状态栏-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <!--沉浸式虚拟导航栏-->
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
+    <style name="ThemeTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">#FF7F24</item>
+        <item name="android:windowBackground">#CDC1C5</item>
     </style>
 
 </resources>

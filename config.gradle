@@ -1,0 +1,17 @@
+ext{
+    //Android配置
+    android=[
+            compileSdkVersion:29,
+            buildToolsVersion:"29.0.2",
+            applicationId:"com.xiaoji.android_work",
+            minSdkVersion:19,
+            targetSdkVersion:29,
+            versionCode:1,
+            versionName:"1.0"
+    ]
+    //依赖配置
+    dependencies=[
+            "appcompat":'androidx.appcompat:appcompat:1.0.2',
+            "mmkv":'com.tencent:mmkv-static:1.1.1'
+    ]
+}

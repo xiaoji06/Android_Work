@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.xiaoji.android_work.android.view.FrameLayout1
+    android:id="@+id/vg1"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <com.xiaoji.android_work.android.view.FrameLayout2
+        android:id="@+id/vg2"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:background="@android:color/holo_green_dark">
+        <com.xiaoji.android_work.android.view.View3
+            android:id="@+id/v3"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:background="@android:color/black"/>
+    </com.xiaoji.android_work.android.view.FrameLayout2>
+
+</com.xiaoji.android_work.android.view.FrameLayout1>
