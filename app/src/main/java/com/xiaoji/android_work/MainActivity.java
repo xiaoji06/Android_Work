@@ -18,6 +18,7 @@ import com.xiaoji.android_work.android.ScanActivity;
 import com.xiaoji.android_work.android.TouchActivity;
 import com.xiaoji.android_work.android.TouchConflictActivity;
 import com.xiaoji.android_work.android.VLayoutActivity;
+import com.xiaoji.android_work.android.VPMainActivity;
 
 public class MainActivity extends AppCompatActivity {
     Intent intent=null;
@@ -82,6 +83,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 intent=new Intent(MainActivity.this, PhotoActivity.class);
                 intent.putExtra("type",5);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_bottom_in, android.R.anim.fade_out);
+            }
+        });
+
+        findViewById(R.id.anim7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent=new Intent(MainActivity.this, VPMainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_bottom_in, android.R.anim.fade_out);
             }
