@@ -38,7 +38,7 @@
             android:value="portrait|landscape" />
 
         <activity
-            android:name=".android.VPMainActivity"
+            android:name=".android.RVPMainActivity"
             android:theme="@style/AppThemeFull">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

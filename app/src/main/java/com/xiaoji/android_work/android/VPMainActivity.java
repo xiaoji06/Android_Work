@@ -1,16 +1,16 @@
 package com.xiaoji.android_work.android;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,10 +18,17 @@ import com.xiaoji.android_work.BaseActivity;
 import com.xiaoji.android_work.BaseFragment;
 import com.xiaoji.android_work.R;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Random;
+
+import static androidx.viewpager.widget.PagerAdapter.POSITION_NONE;
+import static androidx.viewpager.widget.PagerAdapter.POSITION_UNCHANGED;
 
 public class VPMainActivity extends BaseActivity {
 
@@ -33,7 +40,8 @@ public class VPMainActivity extends BaseActivity {
     VP2Fragment homeFirstFragment=null;
     List<HomeBean> allList=new ArrayList<>();
     LinkedHashMap<Integer,ArrayList<HomeBean>> pageList=new LinkedHashMap<>();
-    int pageSize=4;
+    int pageSize=8;
+    HashMap<Integer,Integer> isNew=new HashMap<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -67,14 +75,15 @@ public class VPMainActivity extends BaseActivity {
         findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i=0;i<2;i++){
-                    allList.add(new HomeBean("APP"+ (1+allList.size())));
+                for (int i=0;i<6;i++){
+                    allList.add(new HomeBean(i, "APP"+ (1+allList.size())));
                 }
-                initPage();
+                initPages(false);
                 if (null!=adapter){
                     adapter.notifyDataSetChanged();
                     viewPager.setOffscreenPageLimit(fragments.size());
                 }
+                EventBus.getDefault().post(new MessageEvent());
             }
         });
 
@@ -82,75 +91,128 @@ public class VPMainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 int index=allList.size()-1;
-                for (int i=0;i<2;i++){
+                for (int i=0;i<6;i++){
                     allList.remove(index);
                     index--;
                 }
-                initPage();
+                initPages(false);
                 if (null!=adapter){
                     adapter.notifyDataSetChanged();
                     viewPager.setOffscreenPageLimit(fragments.size());
                 }
+                EventBus.getDefault().post(new MessageEvent());
+            }
+        });
+
+        findViewById(R.id.sort).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Collections.shuffle(allList,new Random(900));
+                initPages(false);
+                if (null!=adapter){
+                    adapter.notifyDataSetChanged();
+                    viewPager.setOffscreenPageLimit(fragments.size());
+                }
+                EventBus.getDefault().post(new MessageEvent());
             }
         });
     }
 
     private void initData() {
         allList.clear();
-        for (int i=0;i<20;i++){
-            allList.add(new HomeBean("APP"+ i));
+        for (int i=0;i<40;i++){
+            allList.add(new HomeBean(i, "APP"+ i));
         }
 
-        homeFirstFragment=new VP2Fragment();
         fragments.clear();
-        //page
-        initPage();
+        //初始化page
+        initPages(true);
     }
 
-    private void initPage() {
+    /**
+     * 计算新的页数，对fragment进行有限的增加和删除
+     * @param isInit 是否是初始化
+     */
+    private void initPages(boolean isInit){
+        long start=System.nanoTime();
+        //算出新的页数
         int page=1;
         int index=1;
-        int oldSize=fragments.size();
+        int oldPageSize=fragments.size();
+
         ArrayList<HomeBean> list=new ArrayList<>();
         VP1Fragment homeFragment=null;
         Bundle homeBundle=null;
-        for (int i=0;i<allList.size();i++){
-            list.add(allList.get(i));
-            index++;
-            if (index==(pageSize+1)||i==(allList.size()-1)){
-                pageList.put(page,list);
-//                if (page==1){
-//                    homeBundle=new Bundle();
-//                    homeBundle.putSerializable("list",list);
-//                    homeBundle.putInt("page",1);
-//                    homeFirstFragment.setArguments(homeBundle);
-//                    fragments.add(homeFirstFragment);
-//                }else {
-//                    homeFragment=new VP1Fragment();
-//                    homeBundle=new Bundle();
-//                    homeBundle.putSerializable("list",list);
-//                    homeBundle.putInt("page",page);
-//                    homeFragment.setArguments(homeBundle);
-//                    fragments.add(homeFragment);
-//                }
-                list=new ArrayList<>();
-                page++;
-                index=1;
+
+        if (allList.size()==0){
+            homeBundle=new Bundle();
+            homeBundle.putSerializable("list",list);
+            homeBundle.putInt("page",page);
+            if (!isInit){
+                fragments.get(0).setArguments(homeBundle);
+                Log.e("aaaa","设置第一页");
+            }else {
+                homeFirstFragment=new VP2Fragment();
+                homeFirstFragment.setUserVisibleHint(true);
+                homeFirstFragment.setArguments(homeBundle);
+                fragments.add(homeFirstFragment);
+                isNew.put(homeFirstFragment.hashCode(),POSITION_UNCHANGED);
+                Log.e("aaaa","设置第"+page+"页");
             }
-        }
-        if (oldSize!=0){
-            if (oldSize>page){//页面减少
-                int dis=oldSize-page;
-                for (int i=0;i<dis;i++){
-                    fragments.remove(page+i);
+        }else {
+            for (int i=0;i<allList.size();i++){
+                list.add(allList.get(i));
+                index++;
+                if (index==(pageSize+1)||i==(allList.size()-1)){
+                    pageList.put(page,list);
+                    if (page==1){
+                        homeBundle=new Bundle();
+                        homeBundle.putSerializable("list",list);
+                        homeBundle.putInt("page",page);
+                        if (!isInit){
+                            fragments.get(0).setArguments(homeBundle);
+                            Log.e("aaaa","设置第一页");
+                        }else {
+                            homeFirstFragment=new VP2Fragment();
+                            homeFirstFragment.setUserVisibleHint(true);
+                            homeFirstFragment.setArguments(homeBundle);
+                            fragments.add(homeFirstFragment);
+                            isNew.put(homeFirstFragment.hashCode(),POSITION_UNCHANGED);
+                            Log.e("aaaa","设置第"+page+"页");
+                        }
+                    }else {
+                        homeBundle=new Bundle();
+                        homeBundle.putSerializable("list",list);
+                        homeBundle.putInt("page",page);
+                        if (page<=oldPageSize&&oldPageSize!=0){
+                            homeFragment= (VP1Fragment) fragments.get(page-1);
+                            homeFragment.setArguments(homeBundle);
+                        }else {
+                            homeFragment=new VP1Fragment();
+                            homeFragment.setArguments(homeBundle);
+                            fragments.add(homeFragment);
+                            isNew.put(homeFragment.hashCode(),POSITION_UNCHANGED);
+                        }
+                    }
+                    list=new ArrayList<>();
+                    page++;
+                    index=1;
                 }
             }
-        }else{
-
+            //如果页面减少了
+            if ((page-1)<oldPageSize&&oldPageSize!=0){
+                //移除相应页面
+                for (int i=(fragments.size()-1);i>(page-2);i--){
+                    isNew.put(fragments.get(i).hashCode(),POSITION_NONE);
+                    fragments.remove(i);
+                }
+            }
         }
+        long end=System.nanoTime();
+        Log.e("change","initpage time="+(end-start));
     }
 
-    class HomePageAdapter extends FragmentPagerAdapter {
+    class HomePageAdapter extends FragmentStatePagerAdapter {
 
         List<BaseFragment> fragments=null;
 
@@ -171,13 +233,18 @@ public class VPMainActivity extends BaseActivity {
         }
 
         @Override
-        public long getItemId(int position) {
-            return this.fragments.get(position).hashCode();
-        }
-
-        @Override
         public int getItemPosition(@NonNull Object object) {
-            return POSITION_NONE;
+
+            return isNew.get(object.hashCode());
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
     }
 }

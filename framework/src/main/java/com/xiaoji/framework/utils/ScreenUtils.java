@@ -3,6 +3,7 @@ package com.xiaoji.framework.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.os.Build;
 import android.view.View;
 import android.view.Window;
@@ -63,6 +64,23 @@ public class ScreenUtils {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
         Window window=activity.getWindow();
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    public static int getScreenWidth(Context context) {
+        WindowManager wm = (WindowManager)context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+        if (wm == null) return -1;
+        Point point = new Point();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            wm.getDefaultDisplay().getRealSize(point);
+        } else {
+            wm.getDefaultDisplay().getSize(point);
+        }
+        return point.x;
+    }
+
+    public static int dpToPx(Context context, float dpValue) {//dp转换为px
+        float scale = context.getResources().getDisplayMetrics().density;//获得当前屏幕密度
+        return (int) (dpValue * scale + 0.5f);
     }
 
 }
