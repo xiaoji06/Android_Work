@@ -4,20 +4,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="60dp"
     android:background="@color/colorPrimary">
 
     <com.xiaoji.android_work.android.view.FrameLayout2
         android:id="@+id/vg2"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@android:color/holo_green_dark">
         <com.xiaoji.android_work.android.view.View3
             android:id="@+id/v3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"
             android:background="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </com.xiaoji.android_work.android.view.FrameLayout2>
+
+    <com.xiaoji.android_work.android.view.FillingRecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"/>
 
 </com.xiaoji.android_work.android.view.FrameLayout1>

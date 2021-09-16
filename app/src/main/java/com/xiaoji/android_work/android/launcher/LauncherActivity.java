@@ -25,16 +25,16 @@ public class LauncherActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.launcher_main);
-        initData();
-
-        vp = (DragViewPager) this.findViewById(R.id.vp);
-
-        PageAdapter myAdapter = new PageAdapter(this, pageData);
-        //边界宽度定义
-        vp.setLeftOutZone(100);
-        vp.setRightOutZone(100);
-        vp.setViewPagerHelper(myAdapter);
-        vp.setAdapter(myAdapter);
+//        initData();
+//
+//        vp = (DragViewPager) this.findViewById(R.id.vp);
+//
+//        PageAdapter myAdapter = new PageAdapter(this, pageData);
+//        //边界宽度定义
+//        vp.setLeftOutZone(100);
+//        vp.setRightOutZone(100);
+//        vp.setViewPagerHelper(myAdapter);
+//        vp.setAdapter(myAdapter);
     }
 
     private void initData() {

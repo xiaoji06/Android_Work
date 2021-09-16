@@ -5,12 +5,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+<!--    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />-->
+<!--    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission
         android:name="android.permission.READ_LOGS"
         tools:ignore="ProtectedPermissions" />
@@ -38,7 +39,7 @@
             android:value="portrait|landscape" />
 
         <activity
-            android:name=".android.RVPMainActivity"
+            android:name=".android.TouchActivity"
             android:theme="@style/AppThemeFull">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,8 +47,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".SettingActivity"
+            android:configChanges="uiMode"
+            android:theme="@style/LanguageTheme"/>
+        <service android:name=".android.MyService"
+            android:exported= "true"/>
         <activity android:name=".GuideActivity" />
-        <activity android:name=".MainActivity" />
         <activity android:name=".android.EventBusActivity" />
         <activity android:name=".android.RecyclerRefreshActivity" />
         <activity android:name=".android.ScanActivity" />
@@ -64,8 +70,22 @@
             android:name=".android.ThemeActivity"
             android:theme="@style/ThemeTheme" />
         <activity android:name=".android.ActivityAnimActivity" />
-        <activity android:name=".android.TouchActivity" />
+        <activity android:name=".WelcomeActivity" />
         <activity android:name=".android.TouchConflictActivity" />
+        <activity android:name=".android.ScrollerActivity" />
+        <activity android:name=".android.Task1Activity" />
+        <activity android:name=".android.Task2Activity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".android.Task3Activity"
+            android:launchMode="singleInstance"/>
+
+        <provider
+            android:authorities="${applicationId}.myprovider"
+            android:name=".android.ContentProviderActivity"
+            android:exported="true"
+            android:enabled="true">
+
+        </provider>
 
         <provider
             android:name="androidx.core.content.FileProvider"

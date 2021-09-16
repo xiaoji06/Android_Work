@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -27,6 +27,20 @@
     <style name="ThemeTheme" parent="AppTheme">
         <item name="android:textColorPrimary">#FF7F24</item>
         <item name="android:windowBackground">#CDC1C5</item>
+    </style>
+
+
+    <style name="MyBottomTheme" parent="Widget.AppCompat.Button.Colored">
+        <item name="colorAccent">#9a678e</item>
+        <item name="colorButtonNormal">#9a678e</item>
+        <item name="android:buttonCornerRadius">15dp</item>
+    </style>
+
+    <style name="LanguageTheme" parent="AppTheme">
+        <!--禁用窗口的预览动画-->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Toast</item>
     </style>
 
 </resources>

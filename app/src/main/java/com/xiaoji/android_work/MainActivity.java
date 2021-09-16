@@ -1,38 +1,41 @@
 package com.xiaoji.android_work;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiaoji.android_work.android.ActivityAnimActivity;
 import com.xiaoji.android_work.android.BannerActivity;
-import com.xiaoji.android_work.android.DialogViewActivity;
+import com.xiaoji.android_work.android.DragRecycleviewActivity;
 import com.xiaoji.android_work.android.PhotoActivity;
-import com.xiaoji.android_work.android.RecyclerRefreshActivity;
 import com.xiaoji.android_work.android.ScanActivity;
-import com.xiaoji.android_work.android.TouchActivity;
 import com.xiaoji.android_work.android.TouchConflictActivity;
 import com.xiaoji.android_work.android.VLayoutActivity;
-import com.xiaoji.android_work.android.VPMainActivity;
 
-public class MainActivity extends AppCompatActivity {
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+public class MainActivity extends BaseActivity {
     Intent intent=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        EventBus.getDefault().register(this);
 
         intent=new Intent(MainActivity.this, ActivityAnimActivity.class);
 
         findViewById(R.id.anim1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent=new Intent(MainActivity.this, RecyclerRefreshActivity.class);
+                intent=new Intent(MainActivity.this, DragRecycleviewActivity.class);
                 intent.putExtra("type",1);
                 startActivity(intent, ActivityOptionsCompat.makeSceneTransitionAnimation(MainActivity.this).toBundle());
             }
@@ -91,15 +94,29 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.anim7).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent=new Intent(MainActivity.this, VPMainActivity.class);
+                intent=new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_bottom_in, android.R.anim.fade_out);
             }
         });
 
 
+        ((TextView)findViewById(R.id.anim10)).setText(getApplicationContext().getResources().getString(R.string.list4));
+
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void changeLanguage(String msg){
+        if (!TextUtils.isEmpty(msg) && msg.equals("chongqi")){
+            recreate();
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 
     /**
      * 防止重叠

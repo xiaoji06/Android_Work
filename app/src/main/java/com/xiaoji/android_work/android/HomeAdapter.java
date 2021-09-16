@@ -3,6 +3,7 @@ package com.xiaoji.android_work.android;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -45,15 +47,26 @@ class HomeAdapter extends BaseMultiItemQuickAdapter<HomeBean, BaseViewHolder> im
         addItemType(SPACE, R.layout.home_item3);
     }
 
+    private boolean canInitView;
+
+    public boolean isCanInitView() {
+        return canInitView;
+    }
+
+    public void setCanInitView(boolean canInitView) {
+        this.canInitView = canInitView;
+    }
+
     @Override
     protected void convert(BaseViewHolder holder, HomeBean homeBean) {
-        if (holder.getItemViewType()==DATA){
-            ImageView imageView=holder.getView(R.id.img);
-            FrameLayout.LayoutParams layoutParams= (FrameLayout.LayoutParams) imageView.getLayoutParams();
-            layoutParams.height=itemW;
-            layoutParams.width=itemW;
-            imageView.setLayoutParams(layoutParams);
-        }
+            if (holder.getItemViewType()==DATA){
+                ImageView imageView=holder.getView(R.id.img);
+                FrameLayout.LayoutParams layoutParams= (FrameLayout.LayoutParams) imageView.getLayoutParams();
+                if (layoutParams.height==itemW){return;}
+                layoutParams.height=itemW;
+                layoutParams.width=itemW;
+                imageView.setLayoutParams(layoutParams);
+            }
     }
 
     @Override

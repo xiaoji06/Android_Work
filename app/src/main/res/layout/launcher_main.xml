@@ -33,6 +33,10 @@
             android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <com.xiaoji.android_work.android.view.ShaderView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
 
     <com.xiaoji.android_work.android.launcher.views.DragViewPager
         android:id="@+id/vp"

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Android_Work</string>
+    <string name="list1">中文 1111</string>
+    <string name="list2">中文 2222</string>
+    <string name="list3">中文 3333</string>
+    <string name="list4">中文 4444</string>
+    <string name="setting">中文 设置:</string>
+    <string name="textText">日间 模式 ++++++++++</string>
 </resources>
